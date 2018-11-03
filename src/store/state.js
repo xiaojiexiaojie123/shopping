@@ -10,5 +10,7 @@ export default {
   // 搜索商品列表
   searchgoodslist: [],
   // 用户信息
-  userInfo: {}
+  userInfo: {},
+  // 购物车列表
+  cartShopList: {}
 }

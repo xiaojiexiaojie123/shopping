@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <router-view/>
+    <!-- keep-alive可以对数据进行缓存 -->
+    <keep-alive> 
+      <router-view/>
+    </keep-alive>
+    
     <tab-bar></tab-bar>
   </div>
 </template>

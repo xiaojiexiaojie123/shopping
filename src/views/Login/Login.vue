@@ -76,13 +76,13 @@
 </template>
 
 <script>
-import { getVerification, svgCaptcha, passwordLogin, verificationLogin } from './../../api/api'
+import { getVerification, passwordLogin, verificationLogin } from './../../api/api'
 import { mapActions } from 'vuex'
 export default {
   name: 'login',
   data () {
     return {
-      loginType: false, // 登录方式
+      loginType: true, // 登录方式
       countdown: 0, // 获取验证码倒计时
       isShowPwd: true, // 是否显示密码
       // 验证码登录
@@ -115,21 +115,23 @@ export default {
     },
     // 获取手机验证码
     async getVerification () {
-      this.switchVerification = !this.switchVerification
-      this.countdown = 10
-      this.timer = setInterval(() => {
-        this.countdown--
-        if (this.countdown === 0) {
-          clearInterval(this.timer)
-          this.switchVerification = true
-        }
-      }, 1000)
-      // 发送验证码请求
-      const res = await getVerification({phone: this.phoneNum})
-      console.log(res)
-      // res.then(result => {
-      //   console.log(result)
-      // })
+      if (this.phoneBlur()) {
+        this.switchVerification = !this.switchVerification
+        this.countdown = 60
+        this.timer = setInterval(() => {
+          this.countdown--
+          if (this.countdown === 0) {
+            clearInterval(this.timer)
+            this.switchVerification = true
+          }
+        }, 1000)
+        // 发送验证码请求
+        const res = await getVerification({phone: this.phoneNum})
+        console.log(res)
+        // res.then(result => {
+        //   console.log(result)
+        // })
+      }
     },
     // 点击更换验证码
     getSvgCaptcha () {
@@ -144,21 +146,19 @@ export default {
         if (this.phoneBlur() && this.phoneVerificationCodeBlur()) {
           const res = await verificationLogin({phone: this.phoneNum, phoneCode: this.phoneVerificationCode})
           if (res.message.success_code === 200) {
-            console.log(res.message.data)
             this.syncUserInfo(res.message.data)
             this.$router.back()
           }
         }
       } else { // 密码登录
-        if (this.usernameBlur() && this.passwordBlur() &&  this.captchaBlur()) {
-          const res = passwordLogin({
+        if (this.usernameBlur() && this.passwordBlur() && this.captchaBlur()) {
+          passwordLogin({
             username: this.username,
             password: this.password,
             captcha: this.pswVerificationCode
           })
         }
       }
-      
     },
     // 手机验证码登录手机验证
     phoneBlur () {

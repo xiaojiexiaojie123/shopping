@@ -1,11 +1,13 @@
 <template>
   <div class="me">
     <select-login v-if="!userInfo.user_id" />
+    <me-top v-else />
   </div>
 </template>
 
 <script>
-import  SelectLogin from './../Login/SelectLogin'
+import SelectLogin from './../Login/SelectLogin'
+import MeTop from './MeTop'
 import { mapState } from 'vuex'
 export default {
   name: 'me',
@@ -17,7 +19,8 @@ export default {
     ...mapState(['userInfo'])
   },
   components: {
-    SelectLogin
+    SelectLogin,
+    MeTop
   }
 }
 </script>
@@ -25,4 +28,5 @@ export default {
 <style lang="stylus" scoped>
 .me
   max-width 640px
+  position relative
 </style>

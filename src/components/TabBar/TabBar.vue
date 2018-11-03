@@ -36,8 +36,8 @@ export default {
           selected: require('./../../../static/img/icon_search_selected.png')
         },
         {
-          title: '聊天',
-          path: '/chat',
+          title: '购物车',
+          path: '/cart',
           normal: require('./../../../static/img/icon_chat.png'),
           selected: require('./../../../static/img/icon_chat_selected.png')
         },
@@ -70,7 +70,7 @@ export default {
   align-items center
   position fixed
   bottom 0
-  padding 8px 0 3px 0
+  padding .08rem 0 .03rem 0
   background #fff
   .foot-item
     flex 1

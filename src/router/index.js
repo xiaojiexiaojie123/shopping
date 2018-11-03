@@ -2,12 +2,14 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // 一级路由
-import Home from './../views/Home/Home'
-import Me from './../views/Me/Me'
-import Login from './../views/Login/Login'
-import Chat from './../views/Chat/Chat'
-import Recommend from './../views/Recommend/Recommend'
-import Search from './../views/Search/Search'
+// import Home from './../views/Home/Home'
+// import Me from './../views/Me/Me'
+// import UserInfo from './../views/Me/UserInfo'
+// import Setting from './../views/Me/Setting'
+// import Login from './../views/Login/Login'
+// import Chat from './../views/Cart/Cart'
+// import Recommend from './../views/Recommend/Recommend'
+// import Search from './../views/Search/Search'
 
 // 二级路由
 import Hot from './../views/Home/Children/Hot/Hot'
@@ -19,6 +21,16 @@ import General from './../views/Home/Children/General'
 import Man from './../views/Home/Children/Man'
 import Mbaby from './../views/Home/Children/Mbaby'
 import Shirt from './../views/Home/Children/Shirt'
+
+// 一级路由
+const Home = () => import('./../views/Home/Home')
+const Me = () => import('./../views/Me/Me')
+const UserInfo = () => import('./../views/Me/UserInfo')
+const Setting = () => import('./../views/Me/Setting')
+const Login = () => import('./../views/Login/Login')
+const Chat = () => import('./../views/Cart/Cart')
+const Recommend = () => import('./../views/Recommend/Recommend')
+const Search = () => import('./../views/Search/Search')
 
 Vue.use(Router)
 
@@ -70,7 +82,7 @@ export default new Router({
       }
     },
     {
-      path: '/chat',
+      path: '/cart',
       component: Chat,
       meta: {
         tabBarShow: true
@@ -82,6 +94,14 @@ export default new Router({
       meta: {
         tabBarShow: true
       }
+    },
+    {
+      path: '/user_info',
+      component: UserInfo
+    },
+    {
+      path: '/setting',
+      component: Setting
     },
     {
       path: '/login',
