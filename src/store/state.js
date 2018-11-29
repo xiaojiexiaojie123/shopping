@@ -12,5 +12,5 @@ export default {
   // 用户信息
   userInfo: {},
   // 购物车列表
-  cartShopList: {}
+  cartShopList: []
 }

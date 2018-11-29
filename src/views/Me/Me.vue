@@ -7,7 +7,7 @@
 
 <script>
 import SelectLogin from './../Login/SelectLogin'
-import MeTop from './MeTop'
+import MeTop from './Metop'
 import { mapState } from 'vuex'
 export default {
   name: 'me',

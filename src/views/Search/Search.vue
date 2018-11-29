@@ -53,7 +53,7 @@
 
 <script>
 import SearchNav from './children/searchNav'
-import SearchPanel from './children/SearchPanel'
+import SearchPanel from './children/searchPanel'
 import BScroll from 'better-scroll'
 export default {
   name: 'search',

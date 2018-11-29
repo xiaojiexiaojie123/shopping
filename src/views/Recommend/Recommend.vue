@@ -3,7 +3,7 @@
     <div class="recommend-inner" ref="recommendInner">
       <ul class="recommend">
         <li class="recommend-item" v-for="(item, index) in recommendshoplist" :key=index>
-          <img v-lazy="item.image_url" alt="">
+          <img :src="item.image_url" alt="">
           <p>{{ item.goods_name }}</p>
           <div class="item-bottom">
             <div class="bottom-left">
@@ -29,7 +29,7 @@ export default {
   data () {
     return {
       page: 1, // 滚动页码
-      currentIndex: null
+      currentIndex: null // 加入购物车商品索引
     }
   },
   mounted () {

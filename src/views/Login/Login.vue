@@ -27,7 +27,7 @@
           </section>
           <section>
             <p class="protocol">
-              温馨提示：未注册撩课拼多多帐号的手机号，登录时将自动注册，且代表已同意
+              温馨提示：未注册爱购物帐号的手机号，登录时将自动注册，且代表已同意
               <i>服务协议与隐私政策</i>
             </p>
           </section>
@@ -152,11 +152,21 @@ export default {
         }
       } else { // 密码登录
         if (this.usernameBlur() && this.passwordBlur() && this.captchaBlur()) {
-          passwordLogin({
+          const res = await passwordLogin({
             username: this.username,
             password: this.password,
-            captcha: this.pswVerificationCode
+            captcha: this.captcha
           })
+          if (res.code === 1001) {
+            this.captchaValidate = true
+          } else if (res.code === 1002) {
+            this.loginValidate = true
+          } else if (res.message.success_code === 200) {
+            this.captchaValidate = false
+            this.loginValidate = false
+            this.syncUserInfo(res.message.data)
+            this.$router.back()
+          }
         }
       }
     },

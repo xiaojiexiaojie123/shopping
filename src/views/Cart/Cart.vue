@@ -1,7 +1,7 @@
 <template>
   <div class="cart">
     <cart-item v-for="(item, index) in cartShopList" :key="index" :cartShopItem=item />
-    <div class="settlement">
+    <div class="settlement" v-if="this.cartShopList && this.cartShopList.length > 0">
       <div class="left">
         <input type="checkbox" name="selectAll" id="selectAll" :checked="isSelectAll" @click="selectAll">
         <label for="selectAll">全选</label>
@@ -11,6 +11,7 @@
         去结算
       </div>
     </div>
+    <div class="cartIsNull" v-else>购物车空空如也</div>
   </div>
 </template>
 
@@ -19,24 +20,22 @@ import CartItem from './child/CartItem'
 import { mapState } from 'vuex'
 export default {
   name: 'cart',
-  data () {
-    return {
-    }
-  },
   computed: {
-    ...mapState(['cartShopList']),
+    cartShopList () {
+      return this.$store.state.cartShopList
+    },
     // 是否全选
     isSelectAll: {
       get () {
         let isSelectAll = true
-        if (this.cartShopList) {
+        if (this.cartShopList && this.cartShopList.length > 0) {
           this.cartShopList.forEach(good => {
             if (!good.checked) {
               isSelectAll = false
             }
           })
-          return isSelectAll
         }
+        return isSelectAll
       },
       set (newValue) {
         console.log(newValue)
@@ -45,14 +44,14 @@ export default {
     // 总价格
     totalPrice () {
       let totalPrice = 0
-      if (this.cartShopList) {
+      if (this.cartShopList && this.cartShopList.length > 0) {
         this.cartShopList.forEach(good => {
           if (good.checked === true) {
             totalPrice += good.price * good.buy_count
           }
         })
-        return totalPrice
       }
+      return totalPrice
     }
   },
   created () {
@@ -111,4 +110,8 @@ export default {
       color #fff
       font-size .24rem
       font-weight 700
+  .cartIsNull
+    margin-top .4rem
+    text-align center
+    font-size .2rem
 </style>

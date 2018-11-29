@@ -6,8 +6,10 @@ import router from '../router'
 // axios配置
 axios.defaults.timeout = 1000 * 30
 axios.defaults.baseURL = process.env.API_HOST // 开发时 http://192.168.0.139:8080/，打包： '/'
-axios.defaults.withCredentials = true
-axios.defaults.crossDomain = true
+// axios.defaults.baseURL = 'http://119.23.225.36:3000/' // 开发时 http://192.168.0.139:8080/，打包： '/'
+
+// axios.defaults.withCredentials = true
+// axios.defaults.crossDomain = true
 
 // 请求时拦截器
 axios.interceptors.request.use(config => {

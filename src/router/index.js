@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './../store'
 
 // 一级路由
 // import Home from './../views/Home/Home'
@@ -31,14 +32,15 @@ const Login = () => import('./../views/Login/Login')
 const Chat = () => import('./../views/Cart/Cart')
 const Recommend = () => import('./../views/Recommend/Recommend')
 const Search = () => import('./../views/Search/Search')
+const ShopDetail = () => import('./../views/ShopDetail/ShopDetail')
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/home'
+      redirect: '/shop_detail'
     },
     {
       path: '/home',
@@ -83,6 +85,7 @@ export default new Router({
     },
     {
       path: '/cart',
+      name: 'cart',
       component: Chat,
       meta: {
         tabBarShow: true
@@ -113,6 +116,23 @@ export default new Router({
       meta: {
         tabBarShow: true
       }
+    },
+    {
+      path: '/shop_detail',
+      component: ShopDetail
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  let isLogin = store.state.userInfo.user_id
+  if (to.name === 'cart') {
+    if (!isLogin) {
+      next({path: '/me'})
+    }
+    next()
+  }
+  next()
+})
+
+export default router
