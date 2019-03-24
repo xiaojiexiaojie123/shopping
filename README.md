@@ -1,4 +1,4 @@
-# pdd
+# shopping
 
 > A Vue.js project
 
